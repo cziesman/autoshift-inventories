@@ -1,0 +1,46 @@
+target/
+.mvn/
+**/src/main/**/target/
+**/src/main/resources/keystore/
+**/src/test/**/target/
+
+### STS ###
+.apt_generated
+.classpath
+.factorypath
+.project
+.settings
+.springBeans
+.sts4-cache
+
+### IntelliJ IDEA ###
+.idea
+*.iws
+*.iml
+*.ipr
+
+### NetBeans ###
+/nbproject/private/
+/nbbuild/
+/dist/
+/nbdist/
+/.nb-gradle/
+build/
+!**/src/main/**/build/
+!**/src/test/**/build/
+
+### VS Code ###
+.vscode/
+
+**/application-stage.yaml
+**/application-dev.yaml
+**/application-dev-secure.yaml
+**/application-dev-novault.yaml
+**/application-dev-vault.yaml
+**/application-local.yaml
+
+/tomcat
+
+/db
+/nb-configuration.xml
+/licenseheader.txt
