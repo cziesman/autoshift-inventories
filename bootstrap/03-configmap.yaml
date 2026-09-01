@@ -1,0 +1,86 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: autoshift-bootstrap
+  namespace: openshift-gitops
+data:
+  bootstrap.sh: |
+    #!/bin/bash
+    set -euo pipefail
+
+    export APP_NAME="autoshift"
+
+    # AutoShift source repository
+    export AUTO_SHIFT_REPO_URL="https://github.com/cziesman/autoshiftv2.git"
+    export AUTO_SHIFT_TARGET_REVISION="main"
+
+    # Policy/custom configuration repository
+    export POLICY_REPO_URL="https://github.com/cziesman/autoshift-platform.git"
+    export POLICY_TARGET_REVISION="main"
+
+    # Values repository
+    export VALUES_REPO_URL="https://github.com/cziesman/autoshift-inventories.git"
+    export VALUES_TARGET_REVISION="main"
+
+    export ARGO_PROJECT="default"
+    export GITOPS_NAMESPACE="openshift-gitops"
+
+    cat <<EOF | oc apply -f -
+    apiVersion: argoproj.io/v1alpha1
+    kind: Application
+    metadata:
+      name: ${APP_NAME}
+      namespace: ${GITOPS_NAMESPACE}
+    spec:
+      project: ${ARGO_PROJECT}
+
+      destination:
+        namespace: ${GITOPS_NAMESPACE}
+        server: https://kubernetes.default.svc
+
+      sources:
+
+        # ------------------------------------------------------------
+        # AutoShift Helm chart
+        # ------------------------------------------------------------
+        - repoURL: ${AUTO_SHIFT_REPO_URL}
+          targetRevision: ${AUTO_SHIFT_TARGET_REVISION}
+          path: autoshift
+          helm:
+            valueFiles:
+              - \$values/values/global.yaml
+              - \$values/values/clustersets/hub.yaml
+              - \$values/values/clustersets/managed.yaml
+
+            parameters:
+              - name: autoshiftGitRepo
+                value: \$ARGOCD_APP_SOURCE_REPO_URL
+              - name: autoshiftGitBranchTag
+                value: \$ARGOCD_APP_SOURCE_TARGET_REVISION
+
+        # ------------------------------------------------------------
+        # Values repository
+        #
+        # The "values" ref makes this repository available to the
+        # AutoShift Helm source through $values/...
+        # ------------------------------------------------------------
+        - repoURL: ${VALUES_REPO_URL}
+          targetRevision: ${VALUES_TARGET_REVISION}
+          ref: values
+
+        # ------------------------------------------------------------
+        # Policy repository
+        #
+        # Contains the ApplicationSet that discovers/generates
+        # Applications for custom policies.
+        # ------------------------------------------------------------
+        - repoURL: ${POLICY_REPO_URL}
+          targetRevision: ${POLICY_TARGET_REVISION}
+          path: applicationsets
+
+      syncPolicy:
+        automated:
+          prune: false
+          selfHeal: true
+
+    EOF

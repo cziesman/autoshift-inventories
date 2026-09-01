@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: autoshift-bootstrap
+  namespace: openshift-gitops
+spec:
+  template:
+    spec:
+      serviceAccountName: autoshift-bootstrap
+      restartPolicy: Never
+
+      containers:
+        - name: bootstrap
+          image: registry.redhat.io/openshift4/ose-cli:v4.20
+          command:
+            - /bin/bash
+            - /scripts/bootstrap.sh
+          volumeMounts:
+            - name: script
+              mountPath: /scripts
+              readOnly: true
+
+      volumes:
+        - name: script
+          configMap:
+            name: autoshift-bootstrap
+            defaultMode: 0555
