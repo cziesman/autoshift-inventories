@@ -13,7 +13,7 @@ autoshift:
 # Git mode renders PolicyGenerator dirs live through the CMP sidecar, so it needs
 # policyGenerator: true below. OCI mode deploys prerendered Helm charts and never uses the CMP.
 autoshiftGitRepo: https://github.com/cziesman/autoshiftv2.git
-autoshiftGitBranchTag: main
+autoshiftGitBranchTag: custom-policy
 
 # OCI mode. autoshiftOciRepo alone selects it; both values are required together.
 # autoshiftOciVersion pins the release, because Argo CD does not reliably track a mutable tag.
