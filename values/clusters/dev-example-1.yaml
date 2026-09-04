@@ -23,7 +23,7 @@
 # ==============================================================================
 
 clusters:
-  dev-example:
+  dev-example-1:
     config:
       # Required: which clusterset this cluster belongs to
       # Used for both inheriting clusterset config defaults and setting the
