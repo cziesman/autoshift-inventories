@@ -32,6 +32,8 @@ data:
               - $siteValues/global.yaml
               - $siteValues/clustersets/hub.yaml
               - $siteValues/clustersets/managed.yaml
+              - $siteValues/clusters/dev-example-1.yaml
+              - $siteValues/clusters/dev-example-2.yaml
     
             parameters:
               - name: autoshiftGitRepo
