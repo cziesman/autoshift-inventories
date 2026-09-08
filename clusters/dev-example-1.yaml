@@ -29,5 +29,5 @@ clusters:
       # Used for both inheriting clusterset config defaults and setting the
       # ManagedClusterSet label on the ClusterDeployment
       clusterSet: managed
-  labels:
-    odf: 'false'
+      labels:
+        odf: 'false'
