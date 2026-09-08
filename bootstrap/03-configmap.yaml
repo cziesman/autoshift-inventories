@@ -25,7 +25,7 @@ data:
     
         # AutoShift mirror, using the custom policy branch
         - repoURL: https://github.com/cziesman/autoshiftv2.git
-          targetRevision: custom-policy
+          targetRevision: main
           path: autoshift
           helm:
             valueFiles:
