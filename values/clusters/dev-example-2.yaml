@@ -251,8 +251,8 @@ clusters:
       clusterInstall:
         createCluster: 'true'                       # Required — triggers provisioning
         platform: baremetal                          # 'baremetal', 'aws', or 'vmware'
-        baseDomain: apps.cluster-z4cdg.dyn.redhatworkshops.io
-        openshiftVersion: '4.20.34'
+        baseDomain: apps.cluster-hxpf4.dyn.redhatworkshops.io
+        openshiftVersion: '4.20.35'
         cpuArch: x86_64                             # default: x86_64
         openshiftChannel: stable                    # ClusterImageSet channel label (default: stable)
         # clusterImageSet: ''                       # optional, overrides openshiftVersion+cpuArch
