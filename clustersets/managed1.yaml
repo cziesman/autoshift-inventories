@@ -1,6 +1,6 @@
 # Spoke Cluster Sets with Feature Flags. Blank will remove
 managedClusterSets:
-  managed:
+  managed1:
     config:
       uwm:
         # storageClass: 'gp3-csi'            # Omit to use cluster default StorageClass

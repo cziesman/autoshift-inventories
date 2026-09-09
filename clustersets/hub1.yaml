@@ -1,6 +1,6 @@
 # Hub Cluster Sets with Feature Flags. Blank will remove
 hubClusterSets:
-  hub:
+  hub1:
     config:
       uwm:
         # storageClass: 'gp3-csi'            # Omit to use cluster default StorageClass
