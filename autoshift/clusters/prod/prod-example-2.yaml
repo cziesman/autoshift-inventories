@@ -23,11 +23,11 @@
 # ==============================================================================
 
 clusters:
-  dev-example-1:
+  prod-example-2:
     config:
       # Required: which clusterset this cluster belongs to
       # Used for both inheriting clusterset config defaults and setting the
       # ManagedClusterSet label on the ClusterDeployment
-      clusterSet: managed1
+      clusterSet: managed
       labels:
         odf: 'false'

@@ -1,0 +1,33 @@
+# ==============================================================================
+# Cluster Install Example - Provision a Baremetal Cluster via SiteConfig
+# ==============================================================================
+# Copy this file and rename it after your cluster (e.g., my-cluster.yaml).
+# Add it to the ArgoCD Application valueFiles to deploy.
+#
+# Usage in ArgoCD Application:
+#   valueFiles:
+#     - values/global.yaml
+#     - values/clustersets/hub.yaml
+#     - values/clustersets/managed.yaml
+#     - values/clusters/my-cluster.yaml    # <-- this file
+#
+# Prerequisites:
+#   - Hub clusterset must have: cluster-install: 'true', acm-enable-provisioning: 'true'
+#   - Source secrets must exist (see docs/cluster-install.md)
+#
+# Config merge order (last wins):
+#   1. Clusterset config (from clusterSet field or managedClusterSet)
+#   2. Per-cluster config (this file)
+#
+# See docs/cluster-install.md for the full guide.
+# ==============================================================================
+
+clusters:
+  dev-example-1:
+    config:
+      # Required: which clusterset this cluster belongs to
+      # Used for both inheriting clusterset config defaults and setting the
+      # ManagedClusterSet label on the ClusterDeployment
+      clusterSet: managed
+      labels:
+        odf: 'false'
