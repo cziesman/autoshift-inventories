@@ -23,7 +23,7 @@
 # ==============================================================================
 
 clusters:
-  example-1:
+  prod-3:
     config:
       # Required: which clusterset this cluster belongs to
       # Used for both inheriting clusterset config defaults and setting the
